@@ -20,6 +20,7 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 @EnableCaching
 @Configuration
+@Profile("prod")
 public class CacheConfig extends CachingConfigurerSupport {
     @Autowired
     RedisConnectionFactory connectionFactory;
