@@ -21,11 +21,9 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 @EnableCaching
 @Configuration
 public class CacheConfig extends CachingConfigurerSupport {
-    private final RedisConnectionFactory connectionFactory;
+    @Autowired
+    RedisConnectionFactory connectionFactory;
 
-    public CacheConfig(RedisConnectionFactory connectionFactory) {
-        this.connectionFactory = connectionFactory;
-    }
 
     @Bean
     public CacheManager redisCacheManager() {
@@ -33,9 +31,8 @@ public class CacheConfig extends CachingConfigurerSupport {
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
 
-        return RedisCacheManager.RedisCacheManagerBuilder
-                .fromConnectionFactory(connectionFactory)
-                .cacheDefaults(redisCacheConfiguration)
-                .build();
+        RedisCacheManager redisCacheManager = RedisCacheManager.RedisCacheManagerBuilder.
+                fromConnectionFactory(connectionFactory).cacheDefaults(redisCacheConfiguration).build();
+        return redisCacheManager;
     }
 }

@@ -19,6 +19,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public WebMvcConfig(SubwayVersion version) {
         this.version = version;
     }
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(PREFIX_STATIC_RESOURCES + "/" + version.getVersion() + "/**")

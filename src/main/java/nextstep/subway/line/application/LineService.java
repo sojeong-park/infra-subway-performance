@@ -55,7 +55,7 @@ public class LineService {
         return LineResponse.of(persistLine);
     }
 
-    @CacheEvict(value="line", key="#id")
+    @Cacheable(value="line", key="#id")
     public void updateLine(Long id, LineRequest lineUpdateRequest) {
         Line persistLine = lineRepository.findById(id).orElseThrow(RuntimeException::new);
         persistLine.update(new Line(lineUpdateRequest.getName(), lineUpdateRequest.getColor()));

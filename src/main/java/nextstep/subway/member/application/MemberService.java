@@ -22,11 +22,13 @@ public class MemberService {
         Member member = memberRepository.save(request.toMember());
         return MemberResponse.of(member);
     }
+
     @Cacheable(value="member", key="#id")
     public MemberResponse findMember(Long id) {
         Member member = memberRepository.findById(id).orElseThrow(RuntimeException::new);
         return MemberResponse.of(member);
     }
+
     @Cacheable(value="member", key="#id")
     public void updateMember(Long id, MemberRequest param) {
         Member member = memberRepository.findById(id).orElseThrow(RuntimeException::new);
