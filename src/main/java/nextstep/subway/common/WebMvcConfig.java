@@ -1,5 +1,6 @@
 package nextstep.subway.common;
 
+import nextstep.subway.common.version.SubwayVersion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -13,9 +14,14 @@ import javax.servlet.Filter;
 public class WebMvcConfig implements WebMvcConfigurer {
     public static final String PREFIX_STATIC_RESOURCES = "/resources";
 
+    private final SubwayVersion version;
+
+    public WebMvcConfig(SubwayVersion version) {
+        this.version = version;
+    }
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler(PREFIX_STATIC_RESOURCES + "/**")
+        registry.addResourceHandler(PREFIX_STATIC_RESOURCES + "/" + version.getVersion() + "/**")
                 .addResourceLocations("classpath:/static/")
                 .setCachePeriod(60 * 60 * 24 * 365);
     }
