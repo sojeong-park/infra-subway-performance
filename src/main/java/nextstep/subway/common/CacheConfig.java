@@ -22,10 +22,19 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 @Configuration
 @Profile("prod")
 public class CacheConfig extends CachingConfigurerSupport {
-    @Autowired
-    RedisConnectionFactory connectionFactory;
+    private final RedisConnectionFactory connectionFactory;
 
+    public CacheConfig(RedisConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
+    }
 
+    @Bean
+    public ObjectMapper objectMapper() {
+        return Jackson2ObjectMapperBuilder.json()
+                .featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .modules(new JavaTimeModule()).build();
+    }
+    
     @Bean
     public CacheManager redisCacheManager() {
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
