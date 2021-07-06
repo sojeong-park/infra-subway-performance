@@ -116,3 +116,41 @@ default ✓ [======================================] 000/100 VUs  4m45.03s
      vus............................: 2       min=2       max=100
      vus_max........................: 100     min=100     max=100
 
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 100 max VUs, 10m0.1s max duration (incl. graceful stop):
+           * default: Up to 100 looping VUs for 9m30.06s over 18 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+WARN[0000] Error from API server                         error="listen tcp 127.0.0.1:6565: bind: address already in use"
+
+running (09m30.7s), 000/100 VUs, 31567 complete and 0 interrupted iterations
+default ✓ [======================================] 000/100 VUs  9m30.06s
+
+     ✓ load main successfully
+
+     checks.........................: 100.00% ✓ 31567     ✗ 0
+     data_received..................: 38 MB   66 kB/s
+     data_sent......................: 2.8 MB  4.9 kB/s
+     http_req_blocked...............: avg=36.54µs min=2.43µs  med=2.87µs  max=30.03ms p(90)=3.17µs   p(95)=3.41µs
+     http_req_connecting............: avg=4.49µs  min=0s      med=0s      max=1.82ms  p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=3.18ms  min=1.6ms   med=2.81ms  max=23.98ms p(90)=4.51ms   p(95)=5.54ms
+       { expected_response:true }...: avg=3.18ms  min=1.6ms   med=2.81ms  max=23.98ms p(90)=4.51ms   p(95)=5.54ms
+     http_req_failed................: 0.00%   ✓ 0         ✗ 31567
+     http_req_receiving.............: avg=88.88µs min=32.59µs med=72.93µs max=9.57ms  p(90)=122.46µs p(95)=167.47µs
+     http_req_sending...............: avg=61.18µs min=21.23µs med=51.75µs max=4.66ms  p(90)=82.35µs  p(95)=98.16µs
+     http_req_tls_handshaking.......: avg=26.56µs min=0s      med=0s      max=28.18ms p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=3.03ms  min=4.65µs  med=2.66ms  max=23.89ms p(90)=4.37ms   p(95)=5.38ms
+     http_reqs......................: 31567   55.311054/s
+     iteration_duration.............: avg=1s      min=1s      med=1s      max=1.03s   p(90)=1s       p(95)=1s
+     iterations.....................: 31567   55.311054/s
+     vus............................: 2       min=1       max=100
+     vus_max........................: 100     min=100     max=100
